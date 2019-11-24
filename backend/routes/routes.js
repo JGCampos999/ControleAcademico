@@ -1,0 +1,52 @@
+const express = require('express')
+const app = express()
+const AllowCors = require('./cors')
+const sql = require('mssql')
+
+const config = {
+    user: 'Filipe',
+    password: 'sou123eu',
+    server: 'localhost',
+    database: 'Siga2'
+};
+
+app.use(AllowCors);
+
+app.post('/insere-falta/:ra_aluno/:codigo_d/:data/:presenca', (req, res)=>{
+    let ra_aluno = req.params.ra_aluno
+    let codigo_d = req.params.codigo_d
+    let data = req.params.data
+    let presenca = req.params.presenca
+
+    request.query(`INSERT INTO Faltas VALUES ('${ra_aluno}', '${codigo_d}', '${data}', ${presenca});`,
+    (err, recordset) => {
+        if (err) {
+            console.log(err)
+        }
+        res.status(200)
+    })
+})
+
+app.post('/insere-nota/:ra_aluno/:codigo_d/:codigo_a/:nota', (req, res)=>{
+    let ra_aluno = req.params.ra_aluno
+    let codigo_d = req.params.codigo_d
+    let codigo_a = req.params.codigo_a
+    let nota = req.params.nota
+
+    request.query(`INSERT INTO Notas VALUES ('${ra_aluno}', '${codigo_d}', '${codigo_a}', ${nota});`,
+    (err, recordset) => {
+        if (err) {
+            console.log(err)
+        }
+        res.status(200)
+    })
+})
+
+app.listen(3001, ()=>{
+    sql.connect(config).then(() => {
+        console.log("server rodando")
+    }).catch((err) => {
+        console.log(err)
+    });
+    request = new sql.Request();
+})
