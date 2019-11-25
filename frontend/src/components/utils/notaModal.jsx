@@ -10,7 +10,7 @@ const NotaModal = (props) => {
     let codigo_d = props.codigo_d.codigo
 
     const [aluno, setAluno] = useState([])
-    const [avaliacao, setAvaliacao] = useState([])
+    const [tipo, setAvaliacao] = useState([])
     const [nota, setNota] = useState(0)
 
     function getAluno(e) {
@@ -21,8 +21,21 @@ const NotaModal = (props) => {
         })
     }
 
-    function getAvaliacao(e){
-        
+    function GetAv(e) {
+        let url = `http://localhost:3001/avaliacao/${codigo_d}/${e}`
+        axios.get(url).then(res => {
+            let data = res.data
+            setAvaliacao(data.recordset)
+        })
+    }
+
+
+    function postNota() {
+        let url = `http://localhost:3001/insere-nota/${codigo_d}/${aluno.ra}/${nota}/${tipo}`
+        axios.post(url).then(res => {
+            alert(res)
+        }
+        )
     }
 
     return (
@@ -35,14 +48,15 @@ const NotaModal = (props) => {
             </Modal.Body>
             <div>
                 {aluno.map(row => (
-                    <Jumbotron style={{justifyContent: "center"}}>
+                    <Jumbotron style={{ justifyContent: "center" }}>
                         <Container>
                             <h1>{row.RA}</h1>
                             <h2>{row.nome}</h2>
                         </Container>
-                        <FormControl type="text" placeholder="Nota" onChange={(e)=>{setNota(e.target.value)}} />
+                        <FormControl type="text" placeholder="Nota" onChange={(e) => { setNota(e.target.value) }} />
+                        <FormControl type="text" placeholder="Tipo Av" className="mt-2 mb-2" onChange={(e) => { setAvaliacao(e.target.value) }} />
                         <br />
-                        <Button variant="secondary">Salvar</Button>
+                        <Button variant="secondary" onClick={() => { postNota() }}>Salvar</Button>
                     </Jumbotron>
                 ))}
             </div>

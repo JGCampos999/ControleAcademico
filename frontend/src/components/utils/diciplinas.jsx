@@ -4,6 +4,7 @@ import { Button, Container } from 'react-bootstrap'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import NotaModal from './notaModal'
 import FaltaModal from './faltaModal'
+import RelatorioModal from './relatorioModal'
 
 class Diciplinas extends React.Component {
 
@@ -13,6 +14,7 @@ class Diciplinas extends React.Component {
             disciplinas: [],
             faltaopen: false,
             notaopen: false,
+            relatorioopen: false,
             selected: {}
         }
         this.getDiciplinas();
@@ -48,6 +50,19 @@ class Diciplinas extends React.Component {
         });
     };
 
+    relatorioClose = () => {
+        this.setState({
+            relatorioopen: false
+        });
+    };
+
+    relatorioOpen = (selected) => {
+        this.setState({
+            relatorioopen: true,
+            selected
+        });
+    };
+
     notaClose = () => {
         this.setState({
             notaopen: false
@@ -68,12 +83,14 @@ class Diciplinas extends React.Component {
                                 Quantidade de Aulas: {row.numAulas}
                             </p>
                             <Button className="mb-2" variant="secondary" onClick={() => { this.faltaOpen(row)}}>Inserir Falta</Button><br/>
-                            <Button variant="secondary" onClick={() => { this.notaOpen(row)}}>Inserir Nota</Button>
+                            <Button className="mb-2" variant="secondary" onClick={() => { this.notaOpen(row)}}>Inserir Nota</Button><br />
+                            <Button variant="info" onClick={()=>{this.relatorioOpen(row)}}>Relatorio de Nota</Button><br />
                         </Container>
                     </Jumbotron>
                 ))}
                 <NotaModal show={this.state.notaopen} close={() => this.notaClose()} codigo_d={this.state.selected} />
                 <FaltaModal show={this.state.faltaopen} close={() => this.faltaClose()} codigo_d={this.state.selected} />
+                <RelatorioModal show={this.state.relatorioopen} close={() => this.relatorioClose()} codigo_d={this.state.selected} />
             </div>
         )
     }
