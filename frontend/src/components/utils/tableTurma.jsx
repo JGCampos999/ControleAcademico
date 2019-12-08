@@ -6,8 +6,8 @@ const Table1 = (props) => {
 
     return (
         <div>
-            {turma.map(row => (
-                <Table key={row.RA_Aluno} >
+            {turma.map((row, idx) => (
+                <Table key={idx} >
                     <td>{row.RA_Aluno}</td>
                     <td>{row.Nome_Aluno}</td>
                     <td>{row.Disciplina}</td>

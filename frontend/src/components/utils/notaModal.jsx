@@ -47,8 +47,8 @@ const NotaModal = (props) => {
                 <FormControl type="text" placeholder="Procurar aluno" className="mt-2 mb-2" onChange={(e) => { getAluno(e.target.value) }} />
             </Modal.Body>
             <div>
-                {aluno.map(row => (
-                    <Jumbotron style={{ justifyContent: "center" }}>
+                {aluno.map((row, idx) => (
+                    <Jumbotron style={{ justifyContent: "center" }} key={idx}>
                         <Container>
                             <h1>{row.RA}</h1>
                             <h2>{row.nome}</h2>

@@ -20,7 +20,7 @@ class Diciplinas extends React.Component {
         this.getDiciplinas();
     }
 
-    getDiciplinas(){
+    getDiciplinas() {
         let url = "http://localhost:3001/disciplinas"
         axios.get(url).then(res => {
             let data = res.data
@@ -72,8 +72,8 @@ class Diciplinas extends React.Component {
     render() {
         return (
             <div>
-                {this.state.disciplinas.map(row => (
-                    <Jumbotron >
+                {this.state.disciplinas.map((row, idx) => (
+                    <Jumbotron key={idx} >
                         <Container>
                             <h1>{row.sigla}</h1>
                             <h2>{row.nome}</h2>
@@ -82,9 +82,9 @@ class Diciplinas extends React.Component {
                                 <br />
                                 Quantidade de Aulas: {row.numAulas}
                             </p>
-                            <Button className="mb-2" variant="secondary" onClick={() => { this.faltaOpen(row)}}>Inserir Falta</Button><br/>
-                            <Button className="mb-2" variant="secondary" onClick={() => { this.notaOpen(row)}}>Inserir Nota</Button><br />
-                            <Button variant="info" onClick={()=>{this.relatorioOpen(row)}}>Relatorio de Nota</Button><br />
+                            <Button className="mb-2" variant="secondary" onClick={() => { this.faltaOpen(row) }}>Inserir Falta</Button><br />
+                            <Button className="mb-2" variant="secondary" onClick={() => { this.notaOpen(row) }}>Inserir Nota</Button><br />
+                            <Button variant="info" onClick={() => { this.relatorioOpen(row) }}>Relatorio de Nota</Button><br />
                         </Container>
                     </Jumbotron>
                 ))}

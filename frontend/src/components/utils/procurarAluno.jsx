@@ -32,8 +32,8 @@ class BuscaAluno extends React.Component {
         return (
             <div>
                 <FormControl type="text" placeholder="Procurar aluno" className="mt-2 mb-2" style={this.inputStyle} onChange={(e) => { this.getAluno(e.target.value) }} />
-                {this.state.aluno.map(row => (
-                    <Jumbotron fluid>
+                {this.state.aluno.map((row, idx) => (
+                    <Jumbotron fluid> key={idx}
                         <Container>
                             <h1>{row.RA}</h1>
                             <h2>{row.nome}</h2>
