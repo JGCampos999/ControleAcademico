@@ -39,7 +39,7 @@ const NotaModal = (props) => {
     }
 
     return (
-        <Modal show={show} onHide={show} onClose={close}>
+        <Modal show={show} onClose={close}>
             <Modal.Header closeButton onClick={close}>
                 Editar Nota
             </Modal.Header>
@@ -54,7 +54,7 @@ const NotaModal = (props) => {
                             <h2>{row.nome}</h2>
                         </Container>
                         <FormControl type="text" placeholder="Nota" onChange={(e) => { setNota(e.target.value) }} />
-                        <FormControl type="text" placeholder="Tipo Av" className="mt-2 mb-2" onChange={(e) => { setAvaliacao(e.target.value) }} />
+                        <FormControl type="text" placeholder="Tipo Av" className="mt-2 mb-2" onChange={(e) => { GetAv(e.target.value) }} />
                         <br />
                         <Button variant="secondary" onClick={() => { postNota() }}>Salvar</Button>
                     </Jumbotron>
